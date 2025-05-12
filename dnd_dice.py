@@ -5,8 +5,9 @@ def clear_screen():
     """
     Clear the terminal screen.
 
-    Uses 'cls' command on Windows and 'clear' on Unix-like systems (Linux/macOS).
-    This helps to start with a clean slate each time the script runs.
+    This function clears the terminal screen, using 'cls' on Windows
+    and 'clear' on Unix-like systems (Linux/macOS). It ensures a clean
+    output each time the script runs.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -15,68 +16,70 @@ def roll_die(sides: int) -> int:
     Simulate rolling a single die with the specified number of sides.
 
     Args:
-        sides (int): Number of sides on the die.
+        sides (int): The number of sides on the die.
 
     Returns:
-        int: Random integer between 1 and 'sides', inclusive.
+        int: A random integer between 1 and 'sides' (inclusive).
     """
     return random.randint(1, sides)
 
 def print_dice_description():
     """
-    Print a clear and informative description of the standard DnD dice.
+    Print a clear description of the standard Dungeons & Dragons dice set.
 
-    This helps users understand the dice involved before seeing the roll results.
+    This provides users with information about the dice being used in the script,
+    including the common names and number of sides for each die.
     """
     print("Standard Dungeons & Dragons Dice:")
     print("-------------------------------")
     print("d4  - Four-sided die (tetrahedron)")
     print("d6  - Six-sided die (cube)")
     print("d8  - Eight-sided die (octahedron)")
-    print("d10 - Ten-sided die (pentagonal trapezohedron)")
-    print("d12 - Twelve-sided die (dodecahedron) - normal")
-    print("d12 - Twelve-sided die (dodecahedron) - percentile (used for percentages)")
+    print("d10 - Ten-sided die (regular)")
+    print("d10 - Ten-sided die (percentile, marked in tens: 00, 10, 20...)")
+    print("d12 - Twelve-sided die (dodecahedron)")
     print("d20 - Twenty-sided die (icosahedron)")
-    print()  # Blank line for spacing
+    print()  # Add a blank line for better readability
 
 def roll_dnd_dice_set():
     """
-    Roll all seven standard DnD dice once and display individual results and total sum.
+    Roll all seven standard DnD dice once and display individual results and the total sum.
 
-    The dice rolled are:
-    - d4, d6, d8, d10, d12 (normal), d12 (percentile), d20
+    The standard dice set includes:
+    - d4, d6, d8, two d10 (one for percentile), d12, d20
 
-    Note: The percentile d12 is simplified here as a d12 for demonstration.
+    The percentile d10 is used in conjunction with the regular d10 to generate
+    a number between 1 and 100.
     """
-    # Define the dice as tuples of (name, number_of_sides)
+    # Correct dice set: d4, d6, d8, two d10, d12, d20
     dice = [
         ('d4', 4),
         ('d6', 6),
         ('d8', 8),
-        ('d10', 10),
-        ('d12 (normal)', 12),
-        ('d12 (percentile)', 12),  # Typically a d10 marked in tens, simplified here
+        ('d10 (regular)', 10),
+        ('d10 (percentile)', 10),  # Percentile die (tens values)
+        ('d12', 12),
         ('d20', 20),
     ]
 
     print("Rolling the 7 standard DnD dice:")
-    total = 0  # Initialize total sum of all dice rolls
+    total = 0  # Initialize the total sum
 
-    # Iterate through each die, roll it, print result, and add to total
+    # Iterate through each die, roll it, print the result, and add to the total
     for name, sides in dice:
         result = roll_die(sides)
         print(f"{name}: {result}")
         total += result
 
-    # After all rolls, print the total sum
+    # Print the total sum of all dice rolls
     print(f"\nTotal sum: {total}")
 
 if __name__ == "__main__":
-    # Clear the screen before starting output for a clean display
+    # Clear the screen for a clean display
     clear_screen()
 
-    # Print descriptive info about the dice being rolled
+    # Print descriptive information about the dice
     print_dice_description()
 
-    # Perform the dice rolls and display results
+    # Perform the dice rolls and display the results
     roll_dnd_dice_set()
