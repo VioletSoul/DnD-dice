@@ -40,18 +40,6 @@ python dice_roller.py
 3. When prompted, enter how many times you want to roll the full dice set.
 4. View the results printed in the terminal.
 
----
-
-## Example Output
-
-Standard Dungeons & Dragons Dice:
-d4  - Four-sided die (tetrahedron) d6  - Six-sided die (cube) d8  - Eight-sided die (octahedron) d10 - Ten-sided die (regular) d10 - Ten-sided die (percentile, marked in tens: 00, 10, 20…) d12 - Twelve-sided die (dodecahedron) d20 - Twenty-sided die (icosahedron)
-How many times would you like to roll the dice set? 2
-Roll #1: d4: 3 d6: 5 d8: 2 d10 (regular): 7 d12: 11 d20: 14 d10 (percentile): 63
-Total sum (including percentile d10): 105
-Roll #2: d4: 1 d6: 6 d8: 8 d10 (regular): 3 d12: 9 d20: 20 d10 (percentile): 27
-Total sum (including percentile d10): 74
-
 
 ---
 
