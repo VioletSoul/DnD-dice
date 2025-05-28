@@ -1,5 +1,13 @@
 # Dungeons & Dragons Dice Roller
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![D&D](https://img.shields.io/badge/Game-D&D-EF1E1E?style=flat&logo=dungeons-and-dragons&logoColor=white)
+![7 Dice](https://img.shields.io/badge/7%20Dice-✓-orange)
+![Interactive](https://img.shields.io/badge/Interactive-✓-brightgreen)
+![Terminal](https://img.shields.io/badge/Terminal-✓-black)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![Open Source](https://img.shields.io/badge/Open%20Source-✓-green)
+
 A simple Python script that simulates rolling the standard set of Dungeons & Dragons dice.  
 It supports rolling the classic seven dice (d4, d6, d8, d10, percentile d10, d12, d20) and outputs individual results along with the total sum.
 
