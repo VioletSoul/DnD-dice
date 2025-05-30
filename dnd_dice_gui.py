@@ -4,6 +4,8 @@ from tkinter import ttk, messagebox, scrolledtext
 import tkinter.font as tkFont
 
 class DiceRollerApp:
+    RESULTS_COLOR_HEX = "#4e6e4a"  # цвет результатов в HEX
+
     def __init__(self, root):
         self.root = root
         self.root.title("D&D Dice Master 9000")
@@ -12,12 +14,12 @@ class DiceRollerApp:
 
         self.info_font = tkFont.Font(family='Arial', size=16)
         self.result_font = tkFont.Font(family='Courier New', size=14)
+        self.result_bold_font = tkFont.Font(family='Courier New', size=14, weight="bold")
 
         self.create_widgets()
         self.setup_layout()
 
     def create_widgets(self):
-        # Информационная панель с описанием кубиков
         self.info_frame = ttk.LabelFrame(self.root, text="О кубиках D&D")
         self.info_text = scrolledtext.ScrolledText(
             self.info_frame,
@@ -26,23 +28,20 @@ class DiceRollerApp:
             font=self.info_font
         )
         self.info_text.insert(tk.END, self.get_dice_description())
-        # Задаём цвет текста описания
         self.info_text.tag_add("colored", "1.0", "end")
-        self.info_text.tag_configure("colored", foreground="#003366")
+        self.info_text.tag_configure("colored", foreground="#276877")
         self.info_text.configure(state='disabled')
 
-        # Панель управления
         self.control_frame = ttk.Frame(self.root)
         self.rolls_label = ttk.Label(self.control_frame, text="Количество бросков:", font=self.info_font)
         self.rolls_entry = ttk.Entry(self.control_frame, width=5, font=self.info_font)
-        self.rolls_entry.insert(0, "2")  # Значение по умолчанию - 2
+        self.rolls_entry.insert(0, "2")
         self.roll_button = ttk.Button(
             self.control_frame,
             text="Бросить кубики!",
             command=self.execute_rolls
         )
 
-        # Панель результатов
         self.result_frame = ttk.LabelFrame(self.root, text="Результаты бросков")
         self.result_text = scrolledtext.ScrolledText(
             self.result_frame,
@@ -50,10 +49,13 @@ class DiceRollerApp:
             height=15,
             font=self.result_font
         )
+        # Цвет результатов берём из переменной
+        self.result_text.tag_configure("result_color", foreground=self.RESULTS_COLOR_HEX)
+        # Итоговая строка
+        self.result_text.tag_configure("total_light_green_bold", foreground="#7baf73", font=self.result_bold_font)
         self.result_text.configure(state='disabled')
 
     def setup_layout(self):
-        # Расположение элементов в окне
         self.info_frame.pack(pady=0, padx=0, fill=tk.X)
         self.info_text.pack(padx=5, pady=5, fill=tk.BOTH, expand=True)
 
@@ -82,10 +84,9 @@ class DiceRollerApp:
         return random.randint(1, sides)
 
     def roll_percentile_dice(self) -> int:
-        tens = self.roll_die(10) - 1  # 0-9
-        ones = self.roll_die(10) - 1  # 0-9
-        result = tens * 10 + ones + 1
-        return result
+        tens = self.roll_die(10) - 1
+        ones = self.roll_die(10) - 1
+        return tens * 10 + ones + 1
 
     def roll_dnd_dice_set(self) -> dict:
         dice = [
@@ -126,9 +127,12 @@ class DiceRollerApp:
 
         for i in range(rolls):
             results = self.roll_dnd_dice_set()
-            self.result_text.insert(tk.END, f"Бросок #{i+1}:\n{'-'*30}\n")
+            self.result_text.insert(tk.END, f"Бросок #{i+1}:\n{'-'*30}\n", "result_color")
             for name, value in results.items():
-                self.result_text.insert(tk.END, f"{name}: {value}\n")
+                if name == 'Total (including percentile)':
+                    self.result_text.insert(tk.END, f"{name}: {value}\n", "total_light_green_bold")
+                else:
+                    self.result_text.insert(tk.END, f"{name}: {value}\n", "result_color")
             self.result_text.insert(tk.END, "\n")
 
         self.result_text.configure(state='disabled')
