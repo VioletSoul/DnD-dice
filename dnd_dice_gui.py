@@ -8,12 +8,12 @@ class DiceRollerApp:
 
     def __init__(self, root):
         self.root = root
-        self.root.title("D&D Dice Master 9000")
-        self.root.geometry("500x655")
+        self.root.title("Мастер кубиков D&D 9000")
+        self.root.geometry("460x685")
         self.root.resizable(False, True)  # Запретить изменение ширины, разрешить высоту
 
         self.info_font = tkFont.Font(family='Arial', size=16)
-        self.result_font = tkFont.Font(family='Courier New', size=14)
+        self.result_font = tkFont.Font(family='Courier New', size=14, weight="bold")
         self.result_bold_font = tkFont.Font(family='Courier New', size=14, weight="bold")
 
         self.create_widgets()
@@ -49,9 +49,7 @@ class DiceRollerApp:
             height=15,
             font=self.result_font
         )
-        # Цвет результатов берём из переменной
         self.result_text.tag_configure("result_color", foreground=self.RESULTS_COLOR_HEX)
-        # Итоговая строка
         self.result_text.tag_configure("total_light_green_bold", foreground="#7baf73", font=self.result_bold_font)
         self.result_text.configure(state='disabled')
 
@@ -69,15 +67,15 @@ class DiceRollerApp:
 
     def get_dice_description(self):
         return (
-            "Standard Dungeons & Dragons Dice:\n"
+            "Стандартные кубики Dungeons & Dragons:\n"
             "-------------------------------\n"
-            "d4  - Four-sided die (tetrahedron)\n"
-            "d6  - Six-sided die (cube)\n"
-            "d8  - Eight-sided die (octahedron)\n"
-            "d10 - Ten-sided die (regular)\n"
-            "d10 - Ten-sided die (percentile, marked in tens: 00, 10, 20...)\n"
-            "d12 - Twelve-sided die (dodecahedron)\n"
-            "d20 - Twenty-sided die (icosahedron)\n"
+            "d4  - Четырёхгранный кубик (тетраэдр)\n"
+            "d6  - Шестигранный кубик (куб)\n"
+            "d8  - Восьмигранный кубик (октаэдр)\n"
+            "d10 - Десятигранный кубик (обычный)\n"
+            "d10 - Десятигранный кубик (процентный: 00, 10, 20...)\n"
+            "d12 - Двенадцатигранный кубик (додекаэдр)\n"
+            "d20 - Двадцатигранный кубик (икосаэдр)\n"
         )
 
     def roll_die(self, sides: int) -> int:
@@ -93,7 +91,7 @@ class DiceRollerApp:
             ('d4', 4),
             ('d6', 6),
             ('d8', 8),
-            ('d10 (regular)', 10),
+            ('d10 (обычный)', 10),
             ('d12', 12),
             ('d20', 20),
         ]
@@ -107,10 +105,10 @@ class DiceRollerApp:
             total += result
 
         percentile_result = self.roll_percentile_dice()
-        results['d10 (percentile)'] = percentile_result
+        results['d10 (процентный)'] = percentile_result
         total += percentile_result
 
-        results['Total (including percentile)'] = total
+        results['Итог (с процентным)'] = total
         return results
 
     def execute_rolls(self):
@@ -127,12 +125,24 @@ class DiceRollerApp:
 
         for i in range(rolls):
             results = self.roll_dnd_dice_set()
+
+            # Считаем сумму без процентного кубика
+            total_without_percentile = sum(
+                value for name, value in results.items()
+                if name != 'd10 (процентный)' and name != 'Итог (с процентным)'
+            )
+
             self.result_text.insert(tk.END, f"Бросок #{i+1}:\n{'-'*30}\n", "result_color")
             for name, value in results.items():
-                if name == 'Total (including percentile)':
+                if name == 'Итог (с процентным)':
                     self.result_text.insert(tk.END, f"{name}: {value}\n", "total_light_green_bold")
+                elif name == 'd10 (процентный)':
+                    self.result_text.insert(tk.END, f"{name}: {value}\n", "result_color")
                 else:
                     self.result_text.insert(tk.END, f"{name}: {value}\n", "result_color")
+
+            # Выводим итог без процентного кубика
+            self.result_text.insert(tk.END, f"Итог (без процентного): {total_without_percentile}\n", "total_light_green_bold")
             self.result_text.insert(tk.END, "\n")
 
         self.result_text.configure(state='disabled')
