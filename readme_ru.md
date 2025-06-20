@@ -1,8 +1,14 @@
 # Мастер кубиков D&D 9000
 
-![Python](https://img.shields.io/badge/Python-3.6%2B-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Tkinter](https://img.shields.io/badge/Tkinter-GUI-orange)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![D&D](https://img.shields.io/badge/Game-D&D-EF1E1E?style=flat&logo=dungeons-and-dragons&logoColor=white)
+![7 Dice](https://img.shields.io/badge/7%20Dice-✓-orange)
+![Interactive](https://img.shields.io/badge/Interactive-✓-brightgreen)
+![Terminal](https://img.shields.io/badge/Terminal-✓-black)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![Open Source](https://img.shields.io/badge/Open%20Source-✓-green)
+[![Stars](https://img.shields.io/github/stars/VioletSoul/DnD-dice.svg?style=social)](https://github.com/VioletSoul/DnD-dice)
+[![Last Commit](https://img.shields.io/github/last-commit/VioletSoul/DnD-dice.svg)](https://github.com/VioletSoul/DnD-dice/commits/main)
 
 Приложение на Python для бросков стандартных кубиков Dungeons & Dragons с удобным графическим интерфейсом.
 

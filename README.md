@@ -7,6 +7,8 @@
 ![Terminal](https://img.shields.io/badge/Terminal-✓-black)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Open Source](https://img.shields.io/badge/Open%20Source-✓-green)
+[![Stars](https://img.shields.io/github/stars/VioletSoul/DnD-dice.svg?style=social)](https://github.com/VioletSoul/DnD-dice)
+[![Last Commit](https://img.shields.io/github/last-commit/VioletSoul/DnD-dice.svg)](https://github.com/VioletSoul/DnD-dice/commits/main)
 
 A simple Python script that simulates rolling the standard set of Dungeons & Dragons dice.  
 It supports rolling the classic seven dice (d4, d6, d8, d10, percentile d10, d12, d20) and outputs individual results along with the total sum.
